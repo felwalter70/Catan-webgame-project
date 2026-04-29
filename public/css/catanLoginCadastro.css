@@ -1,0 +1,130 @@
+.login-cadastro-main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: "none1 container none2";
+    justify-content: center;
+    align-items: center;
+}
+
+.login-cadastro-container {
+    grid-area: container;
+    display: grid;
+    width: 70%;
+    height: 90%;
+    background-color: #8f1e29;
+    border-radius: 0.5rem;
+    margin: auto;
+    border: 1px solid #390c11;
+
+    grid-template-rows: auto 1fr 120px;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "title"
+    "form"
+    "links";
+}
+
+.form-title {
+    grid-area: title;
+}
+
+.form-title h1 {
+    font-size: 5.5rem;
+    margin: 1.5rem auto 0;
+    font-family: Bricolage Grotesque;
+    text-align: center;
+}
+
+.form-inserts {
+    grid-area: form;
+    overflow-y: auto;
+    align-content: center;
+}
+
+.form-inserts form {
+    width: 80%;
+    display: block;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.form-inserts span {
+    width: 80%;
+}
+
+.form-inserts p {
+    font-size: 2rem;
+}
+
+.form-inserts h2 {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.form-camp {
+    width: 90%;
+    margin: 0.5rem 0;
+    border-radius: 0.4rem;
+    border: 1px solid #390c11;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #390c11;
+    padding: 5px;
+    transition: 200ms border ease;
+}
+
+.form-camp:focus {
+    border: 1px solid white;
+    outline: none;
+}
+
+.btn-login {
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 2.3rem;
+    margin: 1.5rem auto;
+}
+
+.form-links {
+    grid-area: links;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+a {
+    text-decoration: none;
+    color: #e3c461;
+    font-size: 1.2rem;
+    transition: 200ms all ease;
+}
+
+a:hover {
+    color: #c09b1f;
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #e3c461;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 40rem;
+}
+
+.time-counter p {
+    font-size: 1.5rem;
+}
+
+.time-counter .code-time-counter {
+    font-size: 2.8rem;
+    text-align: center;
+}

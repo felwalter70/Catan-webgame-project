@@ -1,0 +1,53 @@
+<main>
+    <div class="container-lobby">
+        <div class="main-title-subtitle area1">
+            <h1 class="main-title">CATAN</h1>
+            <hr>
+            <h2>THE GAME</h2>
+            <br>
+        </div>
+        <div class="area2">
+            <div class="lobby-area-1 display">
+                <div class="lobby-header">
+                    <h1>Partidas: </h1>
+                    <button class="btn btn-lobby btn-criar-partida">Criar partida</button>
+                </div>
+                <div class="lobby-outro lobby-matches">
+                    {{#each matches}}
+                        <div class="lobby-match">
+                            <h2>{{matchId}}</h2>
+                            <span>playerImgs</span>
+                            <p> {{nPlayers}} / {{maxPlayers}}</p>
+                            <button class="btn btn-lobby btn-entrar-partida" data-match-id="{{matchId}}">Entrar</button>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="lobby-area-2">
+                <div class="lobby-header">
+                    <h1>Partida atual: </h1>
+                    <button class="btn btn-lobby btn-sair-partida">Sair da partida</button>
+                </div>
+                <div class="lobby-outro actual-match-lobby">
+                    <div class="actual-match-players">
+                        <span>
+                            <h2>Players: </h2>
+                            <h2 class="n-lobby-players"></h2>
+                        </span>
+                        <hr>
+                        <div class="container-lobby-players">
+                        </div>
+                    </div>
+                    <div class="actual-match-misc">
+                        <span>
+                            <h2>Infos: </h2>
+                        </span>
+                        <hr>
+                        <button class="btn btn-lobby btn-ready">Ready</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script type="module" src="/js/catanLobby.js"></script>

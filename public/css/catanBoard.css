@@ -1,0 +1,173 @@
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 19px;
+    color: white;
+    font-family: Bricolage Grotesque;
+}
+
+html,
+body,
+main {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+main {
+    background-image: radial-gradient(circle, #8f1e29, #4a1016);
+}
+
+.container-board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50rem;
+    width: 50rem;
+    background-color: #018ccf;
+    border-radius: 1rem;
+}
+
+.board {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.board-tile {
+    width: 6.875rem;
+    height: 8rem;
+    position: absolute;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background-size: cover;
+}
+
+.board-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.placeholder {
+    opacity: 0;
+}
+
+.tile-num {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0.7rem;
+    width: 0.7rem;
+    height: 1rem;
+    background-color: white;
+    color: #0d6efd;
+    border-radius: 50%;
+    justify-content: center;
+    text-align: center;
+}
+
+.tile-node {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background-color: #8f1e29;
+    z-index: 2;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 300ms ease;
+}
+
+.bandit-tile .tile-num {
+    background-color: #8f1e29;
+    color: white;
+}
+
+.btn {
+    background-color: #0d6efd;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    width: 7.5rem;
+    border: none;
+    border-radius: 1rem;
+    transition: all 200ms ease;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border: none;
+}
+
+.btn:hover {
+    background-color: rgb(53, 74, 150);
+    cursor: pointer;
+}
+
+.btn-get-info {
+    display: inline;
+    height: 2rem;
+    width: 5rem;
+    font-size: 0.9rem;
+}
+
+.form-camp {
+    color: black;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #0d6efd;
+    height: 1.8rem;
+}
+
+.game-buttons {
+    display: flex;
+    position: fixed;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 5px;
+}
+
+.display {
+    display: block;
+    opacity: 1;
+}
+
+.checkbox {
+    width: 50px;
+    height: 25px;
+    appearance: none;
+    background-color: #dae2da;
+    border-radius: 50px;
+    box-shadow: inset 0px 0px 16px 1px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: 0.4s;
+    position: relative;
+}
+
+.checkbox:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-color: #EDF3F1;
+    border-radius: 50px;
+    position: absolute;
+    box-shadow: 0px 4px 8px 1px rgba(0, 0, 0, 0.4);
+    transform: scale(0.8);
+    transition: .4s;
+    left: 0;
+    top: 0;
+}
+
+.checkbox:checked {
+    background-color: #3decb1;
+    transition: 0.4s;
+}
+
+.checkbox:checked::before{
+    transition: .4s;
+    position: absolute;
+    left: 25px;
+    top: 0;
+}

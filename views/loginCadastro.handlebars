@@ -1,0 +1,98 @@
+<main class="login-cadastro-main">
+    <div class="login-cadastro-container">
+        {{#if login}}
+            <div class="form-title">
+                <h1 class="main-title-subtitle">LOGIN</h1>
+                {{#if aviso}}
+                    <p class="error-message">{{aviso}}</p>
+                {{/if}}
+            </div>
+            <div class="form-inserts">
+                <form action="/user/logar" method="post" enctype="multipart/form-data">
+                    <span><h2>Preencha os campos</h2></span>
+                    <span>
+                        <p>Email:</p>
+                        <input class="form-camp" type="email" name="email" placeholder="Digite seu email" required>
+                    </span>
+                    <span>
+                        <p>Senha:</p>
+                        <input class="form-camp" type="password" name="senha" required>
+                    </span>
+                    <span>
+                        <button class="btn btn-lobby btn-login" type="submit">Logar</button>
+                    </span>
+                </form>
+            </div>
+            <div class="form-links">
+                <a href="/user/resetPassword">Esqueceu sua senha?</a>
+                <a href="/user/catanCadastro">Não tem uma conta? cadastre-se</a>
+            </div>
+        {{/if}}
+        {{#if cadastro}}
+            <div class="form-title">
+                <h1 class="main-title-subtitle">CADASTRO</h1>
+                {{#if aviso}}
+                    <p class="error-message">{{aviso}}</p>
+                {{/if}}
+            </div>
+            <div class="form-inserts">
+                <form action="/user/cadastrar" method="post" enctype="multipart/form-data">
+                    <span><h2>Preencha os campos</h2></span>
+                    <span>
+                        <p>Username:</p>
+                        <input class="form-camp" type="text" name="username" placeholder="Digite seu username" required>
+                    </span>
+                    <span>
+                        <p>Email:</p>
+                        <input class="form-camp" type="email" name="email" placeholder="Digite seu email" required>
+                    </span>
+                    <span>
+                        <p>Senha:</p>
+                        <input class="form-camp" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </span>
+                    <span>
+                        <p>Confirme a senha:</p>
+                        <input class="form-camp" type="password" name="senhaConfirmacao" placeholder="Digite sua senha novamente" required>
+                    </span>
+                    <span>
+                        <button class="btn btn-lobby btn-login" type="submit">Cadastrar</button>
+                    </span>
+                </form>
+            </div>
+            <div class="form-links">
+                <a href="/user/catanLogin">Já tem uma conta? faça o login</a>
+            </div>
+        {{/if}}
+         {{#if confirmEmail}}
+            <div class="form-title">
+                <h1 class="main-title-subtitle">CONFIRMAÇÃO</h1>
+                {{#if aviso}}
+                    <p class="error-message">{{aviso}}</p>
+                {{/if}}
+            </div>
+            <div class="form-inserts">
+                <form action="{{urlConfirm}}" method="post" enctype="multipart/form-data">
+                    <span><h2>Digite o código que está no seu email abaixo</h2></span>
+                    <span>
+                        <p>Código de confirmação:</p>
+                        <input class="form-camp" type="text" name="confirmCode" placeholder="Digite o código" required>
+                    </span>
+                    <span>
+                        <button class="btn btn-lobby btn-login" type="submit">Confirmar</button>
+                    </span>
+                    <span class="time-counter">
+                        <p>Tempo restante:</p>
+                        <p class="code-time-counter"></p>
+                    </span>
+                    <span>
+                        <a href="/user/reenviarCodigo">Reenviar código?</a>
+                    </span>
+                </form>
+            </div>
+            <div class="form-links">
+                <a href="/user/catanLogin">Já tem uma conta? faça o login</a>
+            </div>
+            <script type="module" src="/js/cadastroCounter.js"></script>
+        {{/if}}
+    </div>
+</main>
