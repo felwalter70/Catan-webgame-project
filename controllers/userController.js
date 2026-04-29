@@ -39,7 +39,7 @@ async function reenviarCodigo(req, res) {
     
             if (!(await userService.getUserByEmail(req.session.tempEmail))) {
                 const intConfirm = crypto.randomInt(0, 1000000);
-                const codigoConfirm = Number(intConfirm.toString().padStart(6, '0'));
+                const codigoConfirm = intConfirm.toString().padStart(6, '0');
         
                 emailService.enviaEmailConfirmacao(codigoConfirm, req.session.tempEmail);
         
