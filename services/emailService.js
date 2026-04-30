@@ -15,7 +15,7 @@ async function enviaEmailConfirmacao(confirmCode, emailDestinatario) {
         from: 'onboarding@resend.dev',
         to: "felwalter70@gmail.com",
         subject: "Código de confirmação",
-        text: `Olá ${emailDestinatario}\nAqui está seu código de confirmação para sua nova conta no CATAN: ${confirmCode}`
+        text: `Olá ${emailDestinatario}!\n\nAqui está seu código de confirmação para sua nova conta no CATAN: ${confirmCode}.`
     });
 }
 
