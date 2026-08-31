@@ -61,9 +61,63 @@
             </div>
             <div class="form-links">
                 <a href="/user/catanLogin">Já tem uma conta? faça o login</a>
+                <a href="/user/catanCadastro">Não tem uma conta? cadastre-se</a>
             </div>
         {{/if}}
-         {{#if confirmEmail}}
+        {{#if passwordReset}}
+            <div class="form-title">
+                <h1 class="main-title-subtitle">RECUPERAÇÃO</h1>
+                {{#if aviso}}
+                    <p class="error-message">{{aviso}}</p>
+                {{/if}}
+            </div>
+            <div class="form-inserts">
+                <form action="/user/confirmarEmailRecuperacao" method="post" enctype="multipart/form-data">
+                    <span><h2>Informe seu email para a recuperação e alteração da senha</h2></span>
+                    <span>
+                        <p>Email:</p>
+                        <input class="form-camp" type="email" name="email" placeholder="Digite seu email" required>
+                    </span>
+                    <span><h2>Um código de confirmação será enviado</h2></span>
+                    <span>
+                        <button class="btn btn-lobby btn-login" type="submit">Enviar</button>
+                    </span>
+                </form>
+            </div>
+            <div class="form-links">
+                <a href="/user/catanLogin">Já tem uma conta? faça o login</a>
+                <a href="/user/catanCadastro">Não tem uma conta? cadastre-se</a>
+            </div>
+        {{/if}}
+        {{#if alteracaoPassword}}
+            <div class="form-title">
+                <h1 class="main-title-subtitle">ALTERAÇÃO</h1>
+                {{#if aviso}}
+                    <p class="error-message">{{aviso}}</p>
+                {{/if}}
+            </div>
+            <div class="form-inserts">
+                <form action="/user/alterarPassword" method="post" enctype="multipart/form-data">
+                    <span><h2>Digite e confirme a nova senha</h2></span>
+                    <span>
+                        <p>Senha:</p>
+                        <input class="form-camp" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </span>
+                    <span>
+                        <p>Confirme a senha:</p>
+                        <input class="form-camp" type="password" name="senhaConfirmacao" placeholder="Digite sua senha novamente" required>
+                    </span>
+                    <span>
+                        <button class="btn btn-lobby btn-login" type="submit">Cadastrar</button>
+                    </span>
+                </form>
+            </div>
+            <div class="form-links">
+                <a href="/user/catanLogin">Já tem uma conta? faça o login</a>
+                <a href="/user/catanCadastro">Não tem uma conta? cadastre-se</a>
+            </div>
+        {{/if}}
+        {{#if confirmEmail}}
             <div class="form-title">
                 <h1 class="main-title-subtitle">CONFIRMAÇÃO</h1>
                 {{#if aviso}}
@@ -72,7 +126,7 @@
             </div>
             <div class="form-inserts">
                 <form action="{{urlConfirm}}" method="post" enctype="multipart/form-data">
-                    <span><h2>Digite o código que está no seu email abaixo</h2></span>
+                    <span><h2>Digite o código de confirmação que está no seu email abaixo</h2></span>
                     <span>
                         <p>Código de confirmação:</p>
                         <input class="form-camp" type="text" name="confirmCode" placeholder="Digite o código" required>

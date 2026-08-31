@@ -1,4 +1,4 @@
-const pool = require("../config/db");
+const pool = require("../../config/database");
 const argon2 = require("argon2");
 const crypto = require("crypto");
 
@@ -54,7 +54,12 @@ async function insertUserCadastro(requestInfos) {
     
         await pool.execute(queryInsertUserCadastro, dados);
     }
+}
 
+async function changeUserPassword(email, senhaHash) {
+    const queryUpdateUserPassword = "UPDATE users SET senha = ? WHERE email = ?";
+
+    await pool.execute(queryUpdateUserPassword, [senhaHash, email]);
 }
 
 module.exports = {
@@ -63,5 +68,6 @@ module.exports = {
     insertUserConfirmRequest,
     getRequestInfos,
     deleteRequestByEmail,
-    cleanConfirmRequests
+    cleanConfirmRequests,
+    changeUserPassword
 }

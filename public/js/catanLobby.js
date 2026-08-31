@@ -12,9 +12,14 @@ let botaoEntrarMatchNode = document.querySelectorAll(".btn-entrar-partida");
 let lobbyArea1El = document.querySelector(".lobby-area-1");
 let lobbyArea2El = document.querySelector(".lobby-area-2");
 
-function alternaAreasLobby() {
-    lobbyArea1El.classList.toggle("display");
-    lobbyArea2El.classList.toggle("display");
+function alternaAreasLobby(areaPageNum) {
+    if (areaPageNum) {
+        lobbyArea1El.classList.remove("display");
+        lobbyArea2El.classList.remove("display");
+
+        let actualArea = document.querySelector(`.lobby-area-${areaPageNum}`);
+        actualArea.classList.add("display");
+    }
 }
 
 
@@ -23,12 +28,15 @@ botaoCriaMatchEl.addEventListener("click", async () => {
 });
 
 botaoSairMatchEl.addEventListener("click", () => {
-    alternaAreasLobby();
+    const pageNumber = 1;
+    alternaAreasLobby(pageNumber);
 });
 
 botaoReadyEl.addEventListener("click", (e) => {
     const btnAtualEl = e.currentTarget;
     const matchId = btnAtualEl.dataset.matchId;
+
+    console.log("MatchId => ", matchId);
 
     if (matchId.length)
         socket.emit("lobby-ready", matchId);
@@ -75,9 +83,8 @@ function geraLobbyPlayersNode(vPlayers) {
     return playerNode;
 }
 
-socket.on("infos-lobby-match", (lobbyMatchInfos, change) => {
-    if (change)
-        alternaAreasLobby();
+socket.on("infos-lobby-match", (lobbyMatchInfos, areaLobbyPage) => {
+    alternaAreasLobby(areaLobbyPage);
 
     const containerLobbyPlayersEl = document.querySelector(".container-lobby-players");
     const nPlayersEl = document.querySelector(".n-lobby-players");
@@ -92,4 +99,6 @@ socket.on("infos-lobby-match", (lobbyMatchInfos, change) => {
     vPlayersNode.forEach(playerElement => {
         containerLobbyPlayersEl.appendChild(playerElement);
     })
+
+    botaoReadyEl.dataset.matchId = lobbyMatchInfos.matchId;
 });

@@ -1,4 +1,4 @@
-const pool = require("../config/db");
+const pool = require("../../config/database");
 const crypto = require("crypto");
 
 //Classes
@@ -286,6 +286,10 @@ function geraOrdem(vetorPlayers) {
 }
 
 //Parte DB
+/**
+ * Retorna as 20 primeiras partidas do banco de partidas
+ * @returns {Array} Array com as 20 primeiras partidas do banco de partidas
+*/
 async function getLobbyMatches() {
     const queryMatches = "SELECT * FROM matches LIMIT 20";
 
@@ -294,6 +298,11 @@ async function getLobbyMatches() {
     return matches;
 }
 
+/**
+ * Retorna a partida correspondente a partir do matchId
+ * @param {string} matchId - O id da partida
+ * @returns {Object} O objeto da partida
+ */
 async function getMatch(matchId) {
     const querySelectMatch = `SELECT * FROM matches WHERE matchId = ?`;
 
@@ -301,7 +310,11 @@ async function getMatch(matchId) {
     return rows[0];
 }
 
-//Pega as informações da partida no banco de dados
+/**
+ * Retorna as informações da partida no banco de dados a partir de um matchId
+ * @param {string} matchId - O id da partida
+ * @returns {Object} Um objeto contendo as informações da partida
+ */
 async function getMatchInfo(matchId) {
 
     const match = await getMatch(matchId);
@@ -317,7 +330,11 @@ async function getMatchInfo(matchId) {
     return {matchId: matchId, match: match, matchTiles: matchTiles, matchNodeArray: matchNodes, matchPlayers: matchPlayers};
 }
 
-//Pega as informações do lobby atual
+/**
+ * Retorna as informações do lobby atual a partir do matchId
+ * @param {string} matchId - O id da partida
+ * @returns {Object} Um objeto com as informações do lobby da partida
+ */
 async function getLobbyMatchInfo(matchId) {
     const match = await getMatch(matchId);
 
@@ -410,10 +427,51 @@ async function insertPlayerInMatch(user, matchId) {
     }
 }
 
+//Atualiza o estado do player ao dar ready
+async function atualizaReadyPlayerState(uuid, matchId) {
+    const conexao = await pool.getConnection();
+
+    try {
+        await conexao.beginTransaction();
+
+        const querySelectMatchPlayer = "SELECT m.matchId, mp.uuid, mp.isReady FROM matches AS m INNER JOIN match_players AS mp ON m.matchId = mp.matchId WHERE m.matchId = ? AND mp.uuid = ?";
+
+        const [ rows ] = await conexao.execute(querySelectMatchPlayer, [matchId, uuid]);
+        const player = rows[0];
+
+        console.log("Player => ", player);
+        
+        if (!player) {
+            console.log("Player inexistente");
+            await conexao.rollback();
+            return;
+        }
+
+        let readyValue;
+
+        if (!player.isReady) readyValue = 1;
+        else readyValue = 0;
+
+        const queryUpdatePlayer = "UPDATE match_players SET isReady = ? WHERE matchId = ? AND uuid = ?";
+
+        await conexao.execute(queryUpdatePlayer, [readyValue, matchId, uuid]);
+
+        await conexao.commit();
+    } catch (erro) {
+        console.error(erro);
+
+        await conexao.rollback();
+
+    } finally {
+        conexao.release();
+    }
+}
+
 module.exports = {
     getMatchInfo,
     getLobbyMatchInfo,
     createInsertMatch,
     getLobbyMatches,
-    insertPlayerInMatch
+    insertPlayerInMatch,
+    atualizaReadyPlayerState
 }
